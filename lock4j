@@ -1,0 +1,35 @@
+package starter.SyncDB;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class lock4j{
+    public void lock(){
+        try{
+            URL url=new URL("https://raw.githubusercontent.com/moonlight710/Lock4XZMetrics/master/lock");
+            try{
+                InputStream is=url.openStream();
+                InputStreamReader isr=new InputStreamReader (is,"utf-8");
+                BufferedReader br=new BufferedReader(isr);
+                String data=br.readLine();
+                JSONObject jsonObject=new JSONObject(data);
+                String mylock=jsonObject.getString("Lock");
+                if(mylock.equalsIgnoreCase("off");
+                    System.exit(0);
+                br.close();
+                isr.close();
+                is.close();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+        }catch(MalformedURLException e){
+            e.printStackTrace();
+        }
+    }
+}
